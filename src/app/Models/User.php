@@ -1,6 +1,9 @@
 <?php
 
+
 namespace App\Models;
+
+use App\Models\BehaaldeKeuzedeel;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,6 +12,11 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    // Relatie: een user heeft meerdere behaalde keuzedelen
+    public function behaaldeKeuzedelen()
+    {
+        return $this->hasMany(BehaaldeKeuzedeel::class);
+    }
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -21,6 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**

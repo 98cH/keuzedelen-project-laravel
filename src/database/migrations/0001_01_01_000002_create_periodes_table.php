@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('periodes', function (Blueprint $table) {
             $table->id();
+            $table->string('naam', 100);
+            $table->date('startdatum');
+            $table->date('einddatum');
+            $table->boolean('inschrijving_open')->default(false);
             $table->timestamps();
         });
     }
