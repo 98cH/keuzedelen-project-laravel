@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
+    <header>
+        <div class="header-brand">
+            <h1><span style="color: var(--tcr-green);">T</span><span style="color: var(--tcr-yellow);">C</span><span style="color: var(--tcr-green);">R</span></h1>
+        </div>
+        <div class="header-actions">
+            @if(!request()->routeIs('admin.csv.show'))
+                <a href="{{ url('/') }}" class="btn btn-secondary btn-home">Home</a>
+            @endif
+            <a href="{{ url('/admin/keuzedelen') }}" class="btn btn-success">Keuzedelen beheer</a>
+        </div>
+    </header>
     <div class="container-outer">
         <main>
             <h2>CSV Upload - Studenten & Behaalde Keuzedelen</h2>
@@ -19,10 +30,10 @@
                         @foreach($uploadedFiles as $file)
                             <li style="display: flex; align-items: center; margin-bottom: 8px;">
                                 <span style="flex: 1;">{{ $file }}</span>
-                                <form action="{{ route('admin.csv.delete', $file) }}" method="POST" style="display: inline; margin-left: 10px;" onsubmit="return confirm('Weet je zeker dat je {{ $file }} en alle bijbehorende gebruikers wilt verwijderen?');">
+                                <form action="{{ route('admin.csv.delete', $file) }}" method="POST" class="logout-form" onsubmit="return confirm('Weet je zeker dat je {{ $file }} en alle bijbehorende gebruikers wilt verwijderen?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">Verwijderen</button>
+                                    <button type="submit" class="btn btn-xs btn-danger">Verwijderen</button>
                                 </form>
                             </li>
                         @endforeach
@@ -49,8 +60,8 @@
             <form action="{{ route('admin.upload.csv.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <label for="csv_file">Kies een CSV-bestand:</label>
-                <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
-                <button type="submit" class="btn btn-success" style="margin-top: 20px;">Uploaden</button>
+                <input type="file" name="csv_file" id="csv_file" class="file-input" accept=".csv" required>
+                <button type="submit" class="btn btn-success upload-actions">Uploaden</button>
             </form>
         </main>
     </div>
