@@ -8,11 +8,13 @@
 </head>
 <body>
     <header>
-        <h1>TCR Keuzedelen</h1>
-        <div>
+        <div class="header-brand">
+            <h1><span style="color: var(--tcr-green);">T</span><span style="color: var(--tcr-yellow);">C</span><span style="color: var(--tcr-green);">R</span></h1>
+        </div>
+        <div class="header-actions">
+            <a href="{{ url('/') }}" class="btn btn-secondary btn-home">Home</a>
             @auth
-                <span>Welkom, {{ Auth::user()->name }}</span>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:inline; margin-left:10px;">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="logout-form">
                     @csrf
                     <button type="submit" class="btn btn-secondary btn-logout">Uitloggen</button>
                 </form>
@@ -21,23 +23,23 @@
     </header>
     <div class="container-outer">
         <main>
-            <div class="keuzedeel-card" style="max-width: 900px; min-height: 320px; margin: 0 auto; padding: 32px 40px;">
+            <div class="keuzedeel-card keuzedeel-card-large">
                 <h3>Behaalde keuzedelen</h3>
                 @if($behaaldeKeuzedelen->isEmpty())
                     <p>Je hebt nog geen keuzedelen behaald.</p>
                 @else
-                    <table style="width:100%; border-collapse:collapse;">
+                    <table class="data-table">
                         <thead>
-                            <tr style="background:#f4f4f4;">
-                                <th style="padding:8px 12px; text-align:left;">Titel</th>
-                                <th style="padding:8px 12px; text-align:left;">Behaald op</th>
+                            <tr>
+                                <th>Titel</th>
+                                <th>Behaald op</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($behaaldeKeuzedelen as $behaald)
                                 <tr>
-                                    <td style="padding:8px 12px;">{{ $behaald->keuzedeel->titel ?? '-' }}</td>
-                                    <td style="padding:8px 12px;">{{ $behaald->behaald_op ? \Carbon\Carbon::parse($behaald->behaald_op)->format('d-m-Y') : '-' }}</td>
+                                    <td>{{ $behaald->keuzedeel->titel ?? '-' }}</td>
+                                    <td>{{ $behaald->behaald_op ? \Carbon\Carbon::parse($behaald->behaald_op)->format('d-m-Y') : '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

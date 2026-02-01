@@ -18,8 +18,17 @@
     width: auto;
     display: inline-block;
 }
+
+/* TCR Color Palette */
+:root {
+    --tcr-green: #1a6e4a;
+    --tcr-yellow: #c4d600;
+    --tcr-light-orange: #ff9500;
+    --tcr-light-green: #e6f4ea;
+}
+
 .btn-primary {
-    background: #007bff;
+    background: var(--tcr-green);
     color: #fff;
 }
 body {
@@ -34,15 +43,47 @@ html {
     box-sizing: border-box;
 }
 header {
-    background: #e6f4ea;
+    background: var(--tcr-light-green);
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #d1e7dd;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.header-welcome {
+    font-weight: 600;
+    color: #1f2937;
+    white-space: nowrap;
+}
+
+header > span {
+    margin-left: auto;
+    margin-right: 12px;
 }
 h1 {
-    color: #22c55e;
+    color: var(--tcr-green);
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Header brand */
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-brand h1 {
     margin: 0;
     font-size: 2rem;
 }
@@ -53,24 +94,43 @@ h1 {
     font-weight: bold;
     border: none;
     cursor: pointer;
+    font-size: 0.95rem;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 .btn-success {
-    background: #22c55e;
+    background: var(--tcr-green);
     color: #fff;
 }
+
 .btn-secondary {
-    background: #6c757d;
+    background: var(--tcr-green);
     color: #fff;
 }
+
+.btn-warning {
+    background: var(--tcr-yellow);
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn:not(.btn-danger):not(.btn-toggle):hover {
+    background: var(--tcr-yellow);
+    color: #fff;
+}
+
 .btn-login {
-    background: #22c55e;
+    background: var(--tcr-green);
 }
 .btn-logout {
-    background: #6c757d;
+    background: var(--tcr-green);
 }
 main {
-    max-width: none;
-    width: 70vw;
+    max-width: 1100px;
+    width: 100%;
     margin: 40px auto;
     background: #fff;
     padding: 32px;
@@ -82,6 +142,8 @@ main {
     width: 100vw;
     display: flex;
     justify-content: center;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 .page-nav {
     margin-bottom: 16px;
@@ -92,12 +154,13 @@ main {
 }
 @media (max-width: 900px) {
     main {
-        width: 90vw;
+        width: 100%;
     }
 }
 @media (max-width: 600px) {
     main {
-        width: 98vw;
+        width: 100%;
+        padding: 20px;
     }
 }
 .welcome {
@@ -136,7 +199,201 @@ main {
 }
 .keuzedeel-card h3 {
     margin: 0 0 12px 0;
-    color: #22c55e;
+    color: #000;
     font-size: 1.15rem;
 }
 
+
+.page-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+    .btn-row {
+        position: static;
+        transform: none;
+        margin-top: 12px;
+        flex-wrap: wrap;
+    }
+}
+
+/* Inline styles converted to CSS classes */
+
+/* Login form styling */
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.form-checkbox {
+    margin-right: 8px;
+}
+
+.form-actions {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+/* Logout form inline display */
+.logout-form {
+    display: inline;
+    margin-left: 10px;
+}
+
+/* Keuzedeel card styling */
+.keuzedeel-card-large {
+    max-width: 900px;
+    min-height: 320px;
+    margin: 0 auto;
+    padding: 32px 40px;
+}
+
+.keuzedeel-description {
+    margin-bottom: 32px;
+}
+
+/* Table styling */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead tr {
+    background: #f4f4f4;
+}
+
+.data-table th,
+.data-table td {
+    padding: 8px 12px;
+    text-align: left;
+}
+
+/* Status badge styling */
+.status-badge {
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.status-completed {
+    color: green;
+}
+
+.status-available {
+    color: orange;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 0.875rem;
+}
+
+.btn-home {
+    background: var(--tcr-green);
+    color: #fff;
+}
+
+/* Small action button styling */
+.btn-xs {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    width: 160px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-danger {
+    background: var(--tcr-yellow);
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-edit {
+    background: var(--tcr-green);
+    color: #fff;
+}
+
+/* Toggle button styling for Actief/Inactief */
+.btn-toggle {
+    min-width: 100px;
+    text-align: center;
+}
+
+/* Inactive toggle button - stays gray */
+.btn-secondary.btn-toggle {
+    background: #6c757d;
+}
+.btn-toggle.btn-success:hover {
+    background: var(--tcr-green);
+    color: #fff;
+}
+.btn-toggle.btn-secondary:hover {
+    background: #6c757d;
+    color: #fff;
+}
+
+/* Action buttons container */
+.action-buttons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* File input styling */
+.file-input {
+    font-size: 0.95rem;
+}
+
+.file-input::file-selector-button {
+    background: var(--tcr-green);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+.file-input::file-selector-button:hover {
+    background: var(--tcr-yellow);
+    color: #fff;
+}
+
+.upload-actions {
+    margin-top: 20px;
+}

@@ -8,11 +8,11 @@
         @foreach($keuzedelen as $keuzedeel)
             <li>
                 {{ $keuzedeel->titel }}
-                <a href="{{ route('student.keuzedeel.show', $keuzedeel->id) }}" class="btn btn-info btn-sm" style="margin-left:10px;">Meer info</a>
+                <a href="{{ route('student.keuzedeel.show', $keuzedeel->id) }}" class="btn btn-info btn-sm">Meer info</a>
                 @if(in_array($keuzedeel->id, $behaaldeKeuzedeelIds))
-                    <span style="color: green; font-weight: bold;">BEHAALD</span>
+                    <span class="status-badge status-completed">BEHAALD</span>
                 @else
-                    <span style="color: orange; font-weight: bold;">BESCHIKBAAR</span>
+                    <span class="status-badge status-available">BESCHIKBAAR</span>
                 @endif
             </li>
         @endforeach

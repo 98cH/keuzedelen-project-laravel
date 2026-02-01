@@ -8,22 +8,28 @@
 </head>
 <body>
     <header>
-        <h1>TCR Keuzedelen</h1>
-        <div>
+        <div class="header-brand">
+            <h1><span style="color: var(--tcr-green);">T</span><span style="color: var(--tcr-yellow);">C</span><span style="color: var(--tcr-green);">R</span></h1>
+        </div>
+        <div class="header-actions">
+            @if(!request()->routeIs('home'))
+                <a href="{{ url('/') }}" class="btn btn-secondary btn-home">Home</a>
+            @endif
             @guest
                 <a href="{{ route('login') }}" class="btn btn-success btn-login">Inloggen</a>
             @else
-                <span>Welkom, {{ Auth::user()->name }}</span>
+                <span class="header-welcome">Welkom, {{ Auth::user()->name }}</span>
                 @if(Auth::user() && Auth::user()->role === 'student')
-                    <a href="{{ route('inschrijven.create') }}" class="btn btn-primary" style="margin-left:10px;">Inschrijven</a>
-                    <a href="{{ url('/behaalde-keuzedelen') }}" class="btn btn-success" style="margin-left:8px;">Behaalde keuzedelen</a>
+                    <a href="{{ route('inschrijven.create') }}" class="btn btn-primary">Inschrijven</a>
+                    <a href="{{ url('/behaalde-keuzedelen') }}" class="btn btn-success">Behaalde keuzedelen</a>
                 @endif
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:inline; margin-left:10px;">
+                @if(Auth::user() && Auth::user()->role === 'admin')
+                    <a href="{{ url('/admin/upload-csv') }}" class="btn btn-success">CSV upload</a>
+                    <a href="{{ route('admin.keuzedelen.index') }}" class="btn btn-success">Keuzedelen beheer</a>
+                @endif
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="logout-form">
                     @csrf
                     <button type="submit" class="btn btn-secondary btn-logout">Uitloggen</button>
-                    @if(Auth::user() && Auth::user()->role === 'admin')
-                        <a href="{{ url('/admin/upload-csv') }}" class="btn btn-success btn-login" style="margin-left:8px;">CSV upload</a>
-                    @endif
                 </form>
             @endguest
         </div>
@@ -44,10 +50,6 @@
                             @if(Auth::user()->role === 'student')
                                 <div class="btn-row">
                                         <a href="{{ route('keuzedelen.show', $keuzedeel->id) }}" class="btn btn-success">Meer info</a>
-                                </div>
-                            @elseif(Auth::user()->role === 'admin')
-                                <div class="btn-row">
-                                    <a href="#" class="btn btn-warning">Bewerken</a>
                                 </div>
                             @else
                                 <div class="btn-row">
