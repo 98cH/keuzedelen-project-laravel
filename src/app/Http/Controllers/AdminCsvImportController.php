@@ -88,10 +88,7 @@ class AdminCsvImportController extends Controller
             return back()->withErrors('CSV bevat te weinig rijen');
         }
 
-        /* ===============================
-           VASTE STRUCTUUR (OPDRACHT)
-        =============================== */
-
+      
         // Rij 5 → keuzedeelcodes
         $row5 = $rows[4];
         $keuzedeelStruct = [];
@@ -136,10 +133,6 @@ class AdminCsvImportController extends Controller
         if (in_array(false, $cols, true)) {
             return back()->withErrors('Niet alle vereiste kolommen gevonden in CSV');
         }
-
-        /* ===============================
-           STUDENTEN (RIJ 8+)
-        =============================== */
 
         $userCount = 0;
         for ($r = 7; $r < count($rows); $r++) {
