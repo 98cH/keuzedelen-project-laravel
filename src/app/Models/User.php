@@ -12,13 +12,14 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use HasFactory, Notifiable;
+
     // Relatie: een user heeft meerdere behaalde keuzedelen
     public function behaaldeKeuzedelen()
     {
         return $this->hasMany(BehaaldeKeuzedeel::class);
     }
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,10 +27,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'studentnummer',
         'name',
         'email',
-        'password',
+        'klas',
         'role',
+        'password',
     ];
 
     /**

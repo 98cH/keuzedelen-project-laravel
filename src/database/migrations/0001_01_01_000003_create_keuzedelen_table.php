@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('periode_id')
                 ->constrained('periodes')
                 ->onDelete('cascade');
+            $table->foreignId('opleiding_id')->nullable()->constrained('opleidingen')->onDelete('set null');
             $table->timestamps();
         });
     }

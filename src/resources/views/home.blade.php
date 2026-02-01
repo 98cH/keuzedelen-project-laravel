@@ -14,6 +14,10 @@
                 <a href="{{ route('login') }}" class="btn btn-success btn-login">Inloggen</a>
             @else
                 <span>Welkom, {{ Auth::user()->name }}</span>
+                @if(Auth::user() && Auth::user()->role === 'student')
+                    <a href="{{ route('inschrijven.create') }}" class="btn btn-primary" style="margin-left:10px;">Inschrijven</a>
+                    <a href="{{ url('/behaalde-keuzedelen') }}" class="btn btn-success" style="margin-left:8px;">Behaalde keuzedelen</a>
+                @endif
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:inline; margin-left:10px;">
                     @csrf
                     <button type="submit" class="btn btn-secondary btn-logout">Uitloggen</button>
@@ -26,10 +30,7 @@
     </header>
     <div class="container-outer">
     <main>
-        <div class="welcome">
-            <h2>Welkom op het Keuzedelen platform!</h2>
-            <p>Hier vind je alle keuzedelen en kun je eenvoudig inloggen om meer te doen.</p>
-        </div>
+        {{-- Welkomsttekst verwijderd --}}
         <div class="keuzedelen-grid">
             @foreach($keuzedelen as $keuzedeel)
                 <div class="keuzedeel-card">
@@ -40,9 +41,23 @@
                         
                         <h3>{{ $keuzedeel->titel }}</h3>
                         @auth
-                            <a href="#" class="btn btn-success">Meer info</a>
+                            @if(Auth::user()->role === 'student')
+                                <div class="btn-row">
+                                        <a href="{{ route('keuzedelen.show', $keuzedeel->id) }}" class="btn btn-success">Meer info</a>
+                                </div>
+                            @elseif(Auth::user()->role === 'admin')
+                                <div class="btn-row">
+                                    <a href="#" class="btn btn-warning">Bewerken</a>
+                                </div>
+                            @else
+                                <div class="btn-row">
+                                        <a href="{{ route('keuzedelen.show', $keuzedeel->id) }}" class="btn btn-success">Meer info</a>
+                                </div>
+                            @endif
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-secondary">Log in voor meer info</a>
+                            <div class="btn-row">
+                                <a href="{{ route('login') }}" class="btn btn-secondary">Log in voor meer info</a>
+                            </div>
                         @endauth
                 </div>
             @endforeach
@@ -51,3 +66,35 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

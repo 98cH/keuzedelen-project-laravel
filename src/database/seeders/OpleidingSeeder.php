@@ -13,7 +13,7 @@ class OpleidingSeeder extends Seeder
      */
     public function run(): void
     {
-        Opleiding::create(['naam' => 'ICT Support Technician']); // id = 1
-        Opleiding::create(['naam' => 'Software Developer']);     // id = 2
+        Opleiding::create(['naam' => 'ICT Support Technician', 'code' => '25604BOL']); // id = 1
+        Opleiding::create(['naam' => 'Software Developer', 'code' => '25998BOL']);     // id = 2
     }
 }

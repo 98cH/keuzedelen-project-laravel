@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -10,7 +11,42 @@
     <div class="container-outer">
         <main>
             <h2>CSV Upload - Studenten & Behaalde Keuzedelen</h2>
-            <form action="{{ route('admin.upload.csv') }}" method="POST" enctype="multipart/form-data">
+
+            @if(isset($uploadedFiles) && count($uploadedFiles) > 0)
+                <div style="background: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+                    <strong>Geüploade bestanden:</strong>
+                    <ul style="margin:0; padding-left: 20px; list-style: none;">
+                        @foreach($uploadedFiles as $file)
+                            <li style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <span style="flex: 1;">{{ $file }}</span>
+                                <form action="{{ route('admin.csv.delete', $file) }}" method="POST" style="display: inline; margin-left: 10px;" onsubmit="return confirm('Weet je zeker dat je {{ $file }} en alle bijbehorende gebruikers wilt verwijderen?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">Verwijderen</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if(session('success'))
+                <div style="background: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div style="background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+                    <ul style="margin:0; padding-left: 20px;">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('admin.upload.csv.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <label for="csv_file">Kies een CSV-bestand:</label>
                 <input type="file" name="csv_file" id="csv_file" accept=".csv" required>

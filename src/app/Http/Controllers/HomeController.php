@@ -14,8 +14,8 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->role === 'student') {
             // Haal het opleiding_id van de student op
             $opleidingId = Auth::user()->opleiding_id;
-            // Haal alleen keuzedelen op die bij de opleiding horen (voor demo: filter op periode)
-            $keuzedelen = Keuzedeel::where('periode_id', $opleidingId)->get();
+            // Haal alleen keuzedelen op die bij de opleiding horen
+            $keuzedelen = Keuzedeel::where('opleiding_id', $opleidingId)->get();
         } else {
             // Haal alle keuzedelen op voor gasten en andere rollen
             $keuzedelen = Keuzedeel::all();

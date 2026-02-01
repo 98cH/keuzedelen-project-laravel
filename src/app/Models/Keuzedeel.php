@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Keuzedeel extends Model
 {
+    protected $table = 'keuzedelen';
+
     // Relatie: een keuzedeel kan door meerdere users behaald zijn
-    public function behaaldeKeuzedelen()
+    public function behaaldeDoorUsers()
     {
         return $this->hasMany(BehaaldeKeuzedeel::class);
     }
-    protected $table = 'keuzedelen';
 }
