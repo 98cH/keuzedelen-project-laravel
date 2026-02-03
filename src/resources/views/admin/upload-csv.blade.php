@@ -21,9 +21,6 @@
     </header>
     <div class="container-outer">
         <main>
-            <div class="page-nav">
-                <a href="{{ url('/') }}" class="btn btn-secondary btn-home">Home</a>
-            </div>
             <h2>CSV Upload - Studenten & Behaalde Keuzedelen</h2>
 
             @if(isset($uploadedFiles) && count($uploadedFiles) > 0)
